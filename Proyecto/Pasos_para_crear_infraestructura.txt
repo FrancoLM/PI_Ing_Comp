@@ -1,0 +1,74 @@
+install virtualbox
+install vagrant
+decidi usar centOS porque se usa para empresas
+Hay que tener wget en la maq de desarrollo
+
+
+------------
+Para actualizar una imagen de vagrant:
+hago un box add de la imagen de coreOS
+modifico el vagrant file para levantar esa imagen
+no tiene java -> hago sudo yum install java-1.6.0-openjdk
+necesito actualizar mi imagen con esto...
+Hago vagrant package --base <name-in-virtualbox> --output <package-filename>
+Luego vagrant box add <box-name> <package-filename> --force
+(el file pesa 600 MB... tiene que haber otra forma de agregar cosas a mis imagenes... como pesa tanto lo saque del repo)
+------------
+
+Para bajar el rpm de Java:
+wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.rpm
+
+Me fijo el nombre del package en la pagina de oracle
+http://www.oracle.com/technetwork/es/java/javase/downloads/jdk7-downloads-1880260.html
+
+
+Ver si necesito modificar el JAVA_HOME en las maquinas
+
+Ver como poner todo el configure de las maquinas en un script, para bajar todas las dependencias
+
+Ver como crear un usuario en las VMs
+
+Voy a basar la instalacion en:
+https://github.com/ptgoetz/storm-vagrant
+
+La forma en que estoy bajando los archivos no es buena.... si algo cambia, se rompe todo. tendria que ejercitar el borrado de los archivos
+
+
+-------------
+Zookeeper:
+Los estoy corriendo en standalone mode. deberia de pensar en modo replicado:
+https://zookeeper.apache.org/doc/r3.1.2/zookeeperStarted.html#sc_RunningReplicatedZooKeeper
+Tendria que agregarle cambios en los logs
+
+estoy levantando centos
+que necesito saber/hacer?
+levantar varias maquinas
+que tienen adentro? ver como instalar -> crear un script de instalacion. chef?
+
+
+
+RabbitMQ:
+Tengo que crear un config file para habilitar MQTT. Este file es el /etc/rabbitmq/rabbitmq.config
+Anduvo! Ahora hay que ver como autenticar a los clientes.... certificado?
+
+
+Tengo que guardar los datos en algun lado??
+
+--------------------------------------------
+Problemas a resolver:
+Crear usuario para la VM Zookeeper
+el config para correr supervisord al inicio tiene un caracter de DOS
+sed 's/^M$//' /etc/init.d/supervisord > /etc/init.d/supervisord
+lo soluciona
+
+Segurizar y mejorar el archivo supervisord! Implementar el reload!
+STOP parece no andar!!!!!! (o es el problema que zookeeper no muere??)
+Poner a donde van los logs de zookeeper?
+
+Logviewer de nimbus por puerto 8000 -> ver como acceder!
+
+Agregar una tool para trackeard defectos
+
+tengo que usar destroy -f para las VMs!
+
+agregar success / fail / abort messages a los scripts de vagrant!

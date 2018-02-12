@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src/test/java" output="target/test-classes" including="**/*.java"/>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar" sourcepath="M2_REPO/javax/servlet/servlet-api/2.5/servlet-api-2.5-sources.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/storm/storm-core/0.10.0/storm-core-0.10.0.jar" sourcepath="M2_REPO/org/apache/storm/storm-core/0.10.0/storm-core-0.10.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/esotericsoftware/kryo/kryo/2.21/kryo-2.21.jar" sourcepath="M2_REPO/com/esotericsoftware/kryo/kryo/2.21/kryo-2.21-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/esotericsoftware/reflectasm/reflectasm/1.07/reflectasm-1.07-shaded.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm/4.0/asm-4.0.jar" sourcepath="M2_REPO/org/ow2/asm/asm/4.0/asm-4.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/esotericsoftware/minlog/minlog/1.2/minlog-1.2.jar" sourcepath="M2_REPO/com/esotericsoftware/minlog/minlog/1.2/minlog-1.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/clojure/clojure/1.6.0/clojure-1.6.0.jar" sourcepath="M2_REPO/org/clojure/clojure/1.6.0/clojure-1.6.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/googlecode/disruptor/disruptor/2.10.4/disruptor-2.10.4.jar" sourcepath="M2_REPO/com/googlecode/disruptor/disruptor/2.10.4/disruptor-2.10.4-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/logging/log4j/log4j-api/2.1/log4j-api-2.1.jar" sourcepath="M2_REPO/org/apache/logging/log4j/log4j-api/2.1/log4j-api-2.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/logging/log4j/log4j-core/2.1/log4j-core-2.1.jar" sourcepath="M2_REPO/org/apache/logging/log4j/log4j-core/2.1/log4j-core-2.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/logging/log4j/log4j-slf4j-impl/2.1/log4j-slf4j-impl-2.1.jar" sourcepath="M2_REPO/org/apache/logging/log4j/log4j-slf4j-impl/2.1/log4j-slf4j-impl-2.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/log4j-over-slf4j/1.6.6/log4j-over-slf4j-1.6.6.jar" sourcepath="M2_REPO/org/slf4j/log4j-over-slf4j/1.6.6/log4j-over-slf4j-1.6.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/hadoop/hadoop-auth/2.4.0/hadoop-auth-2.4.0.jar" sourcepath="M2_REPO/org/apache/hadoop/hadoop-auth/2.4.0/hadoop-auth-2.4.0-sources.jar"/>
+</classpath>

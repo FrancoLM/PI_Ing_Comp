@@ -1,0 +1,72 @@
+#!/bin/bash
+
+echo ---------- SETUP
+
+cd /opt
+echo ----- Copying installation files...
+aws s3 cp s3://tesis.project.files/java/jdk-8u111-linux-x64.rpm /tmp --region sa-east-1
+
+aws s3 cp s3://tesis.project.files/zookeeper/zookeeper-3.4.9.tar.gz /tmp --region sa-east-1
+aws s3 cp s3://tesis.project.files/zookeeper/zoo.cfg /tmp --region sa-east-1
+aws s3 cp s3://tesis.project.files/zookeeper/supervisord_zk_process.conf /tmp --region sa-east-1
+
+aws s3 cp s3://tesis.project.files/supervisord/supervisord /tmp --region sa-east-1
+aws s3 cp s3://tesis.project.files/supervisord/supervisord.conf /tmp --region sa-east-1
+
+# cp -i may be the default (asks when overwriting files)
+# unalias cp
+echo ----- Installing Package JAVA...
+
+sudo rpm -ivh /tmp/jdk-8u111-linux-x64.rpm
+echo ----- Installation of JAVA finished!
+
+echo ----- Installing ZOOKEEPER...
+# Decompress zookeeper
+sudo tar -xzf /tmp/zookeeper-3.4.9.tar.gz -C /opt/
+# Copy config file
+sudo rm -f /opt/zookeeper-3.4.9/conf/zoo.cfg
+sudo \cp /tmp/zoo.cfg /opt/zookeeper-3.4.9/conf/zoo.cfg
+# Create symbolic link
+sudo ln -s /opt/zookeeper-3.4.9 /zk
+echo ----- Installation of ZOOKEEPER finished!
+
+echo ----- Installing SUPERVISORD and dependencies...
+sudo pip install supervisor
+
+echo ---------- Creating supervisord configuration file...
+
+# \echo_supervisord_conf >> /tmp/supervisord.conf
+sudo rm -f /etc/supervisord.conf
+sudo \cp /tmp/supervisord.conf /etc/supervisord.conf
+sudo sed -i 's/;\[inet_http_server\]*/\[inet_http_server\]/g' /etc/supervisord.conf
+# sudo sed -i 's/;port=127.0.0.1:9001*/port=\*:9001/g' /etc/supervisord.conf
+sudo sed -i 's/;port=0.0.0.0:9001*/port=0.0.0.0:9001/g' /etc/supervisord.conf
+
+echo ---------- File created!
+echo ---------- Adding process to supervisord configuration file...
+
+sudo sh -c "cat /tmp/supervisord_zk_process.conf >> /etc/supervisord.conf"
+
+echo ---------- Program added!
+echo ---------- Adding supervisord to startup and running it...
+
+sudo rm -f /etc/rc.d/init.d/supervisord
+sudo \cp /tmp/supervisord /etc/rc.d/init.d/supervisord
+sudo chmod a+x /etc/rc.d/init.d/supervisord
+
+supervisord -c /etc/supervisord.conf
+
+sudo chown ec2-user:ec2-user /tmp/supervisor.sock
+sudo chown ec2-user:ec2-user /tmp/supervisord.log
+
+echo ---------- Finished supervisord startup configuration...
+echo ----- Installation of SUPERVISORD finished!
+
+echo ----- Make supervisord to start after reboot
+
+sudo chkconfig --add supervisord
+sudo chkconfig supervisord on
+
+echo ----- Start SUPERVISORD
+
+sudo service supervisord restart
